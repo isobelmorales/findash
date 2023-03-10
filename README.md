@@ -16,7 +16,6 @@ Features:
 
 - Python
 - Django
-- React
 - Bootstrap
 - SQL
 
