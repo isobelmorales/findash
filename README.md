@@ -96,3 +96,7 @@ As a user, I want the ability to...
 
 - Bill splitting feature
 - Upload pictures of receipts
+
+## Requirements
+
+- django-bootstrap-v5
