@@ -1,10 +1,5 @@
 from django.shortcuts import render
-
-# temporary transactions seed
-transactions = [
-    {'name': 'Trader Joe\'s', 'date': 'March 12, 2023', 'account': 'AmEx', 'amount': '$50', 'category': 'Groceries'},
-    {'name': 'Bluestone Lane', 'date': 'March 13, 2023', 'account': 'Cash', 'amount': '$10', 'category': 'Food & Drinks'}
-]
+from .models import Transaction
 
 # Create your views here.
 
@@ -12,6 +7,8 @@ transactions = [
 def home(request):
     return render(request, 'home.html')
 
-# Transaction Index
+# Transactions Index
 def transactions_index(request):
+    # collecting transaction model/info from SQL
+    transactions = Transaction.objects.all()
     return render(request, 'transactions/index.html', { 'transactions': transactions })
