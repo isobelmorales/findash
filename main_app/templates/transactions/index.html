@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions | FinDash {% endblock %}
+
+{% block content %}
+    <h1>Transactions</h1>
+    <hr>
+    <table class="striped centered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Amount</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.name }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.account }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.category }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
