@@ -49,8 +49,8 @@
             </div>
         </div>
         <div class="container mt-2">
-            <a href="#" class="btn  btn-outline-dark">Edit</a>
-            <a href="#" class="btn btn-outline-danger">Delete</a>
+            <a href="{% url 'accounts_update' account.id %}" class="btn  btn-outline-dark">Edit</a>
+            <a href="{% url 'accounts_delete' account.id %}" class="btn btn-outline-danger">Delete</a>
         </div>
     </div>
 {% endblock %}

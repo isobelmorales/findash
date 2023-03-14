@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account
 
 
@@ -39,7 +40,7 @@ def accounts_index(request):
     return render(request, 'accounts/index.html', { 'accounts': accounts })
 
 # Create Account
-class AccountCreate(CreateView):
+class AccountCreate(LoginRequiredMixin, CreateView):
     model = Account
     fields = ['name', 'balance', 'type']
 
@@ -53,3 +54,13 @@ def show_account(request, account_id):
     account = Account.objects.get(id=account_id)
 
     return render(request, 'accounts/show.html', { 'account': account })
+
+# Update Account
+class AccountUpdate(LoginRequiredMixin, UpdateView):
+    model = Account
+    fields = ['balance', 'type']
+
+# Delete Account
+class AccountDelete(LoginRequiredMixin, DeleteView):
+    model = Account
+    success_url = '/wallet/accounts/'
