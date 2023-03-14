@@ -2,31 +2,94 @@
 
 {% block title %}Transactions | FinDash {% endblock %}
 
+{% block sidebar %}
+    <li class="nav-item">
+        <a href="{% url 'home' %}" class="nav-link align-middle px-0 text-white">
+            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+        </a>
+    </li>
+    <li>
+        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Accounts</span> </a>
+        <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+            <li class="w-100">
+                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white">
+            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Transactions</span></a>
+        <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+            <li class="w-100">
+                <a href="{% url 'transactions_index' %}" class="nav-link px-0 active"> <span class="d-none d-sm-inline">Index</span> 1</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="nav-link px-0 align-middle text-white">
+            <i class="bi bi-pie-chart-fill"></i> <span class="ms-1 d-none d-sm-inline">Budget</span> </a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <h1>Transactions</h1>
     <hr>
-    <a class="right btn-floating btn waves-effect waves-light blue modal-trigger" href="{% url 'transactions_create' %}"><i class="material-icons">add</i></a>
-    <table class="striped centered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Account</th>
-                <th>Amount</th>
-                <th>Category</th>
-            </tr>
-        </thead>
+    <!-- Trigger Modal Button -->
+    <div class="d-flex justify-content-md-end">
+        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#newTransaction">
+            <i class="bi bi-plus-circle-fill"></i> Add Transaction
+        </button>
+    </div>
 
-        <tbody>
-            {% for transaction in transactions %}
+    <!-- Modal -->
+    <div class="modal fade" id="newTransaction" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New Transaction</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                New transaction form
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+            <button type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Table of All Transactions -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
                 <tr>
-                    <td>{{ transaction.name }}</td>
-                    <td>{{ transaction.date }}</td>
-                    <td>{{ transaction.account }}</td>
-                    <td>${{ transaction.amount }}</td>
-                    <td>{{ transaction.category }}</td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.name }}</td>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.account }}</td>
+                        <td>${{ transaction.amount }}</td>
+                        <td>{{ transaction.category }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
