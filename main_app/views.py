@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
-from .models import Transaction
+from .models import Transaction, Account, Budget
 from .forms import TransactionForm
 
 # Create your views here.
@@ -29,3 +29,15 @@ def add_transaction(request):
         new_transaction.save()
     
     return redirect('transactions_index')
+
+# Accounts Index
+def accounts_index(request):
+    accounts = Account.objects.all()
+
+    return render(request, 'accounts/index.html', { 'accounts': accounts })
+
+# Budget Index
+def budgets_index(request):
+    budgets = Budget.objects.all()
+
+    return render(request, 'budgets/index.html', { 'budgets': budgets })

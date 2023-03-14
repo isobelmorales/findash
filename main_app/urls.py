@@ -11,5 +11,5 @@ urlpatterns = [
     # accounts index
     path('accounts/', views.accounts_index, name='accounts_index'),
     # budgets index
-    path('budget/', views.budget_index, name='budget_index'),
+    path('budgets/', views.budgets_index, name='budgets_index'),
 ]
