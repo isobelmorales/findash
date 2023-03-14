@@ -12,7 +12,7 @@ TYPES = (
 # Create your models here.
 
 # Account
-class Account(models.Model):
+class WalletAccount(models.Model):
     name = models.CharField(max_length=50)
     balance = models.IntegerField()
     type = models.CharField(
@@ -41,7 +41,7 @@ class Budget(models.Model):
 class Transaction(models.Model):
     description = models.CharField(max_length=100)
     date = models.DateField()
-    account = models.ManyToManyField(Account)
+    account = models.ManyToManyField(WalletAccount)
     amount = models.IntegerField()
     category = models.ManyToManyField(Budget)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

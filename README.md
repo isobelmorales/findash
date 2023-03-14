@@ -57,14 +57,14 @@ As a user, I want the ability to...
 
 ## URL Paths
 
-### Accounts
+### Wallet (Accounts)
 
-| Path                      | View                          | Name            |
-|---------------------------|-------------------------------|-----------------|
-| accounts/                 | views.accounts_index          | accounts_index  |
-| accounts/create/          | views.AccountCreate.as_view() | accounts_create |
-| accounts/<int:pk>/update/ | views.AccountUpdate.as_view() | accounts_update |
-| accounts/<int:pk>/delete/ | views.AccountDelete.as_view() | accounts_delete |
+| Path                    | View                         | Name          |
+|-------------------------|------------------------------|---------------|
+| wallet/                 | views.wallet_index           | wallet_index  |
+| wallet/create/          | views.WalletCreate.as_view() | wallet_create |
+| wallet/<int:pk>/update/ | views.WalletUpdate.as_view() | wallet_update |
+| wallet/<int:pk>/delete/ | views.WalletDelete.as_view() | wallet_delete |
 
 ### Transactions
 
@@ -87,11 +87,11 @@ As a user, I want the ability to...
 
 ### Authentication
 
-| Path                 | View                 | Name            |
-|----------------------|----------------------|-----------------|
-| auth/signup/         | views.signup         | sign_up         |
-| auth/signin/         | views.signin         | sign_in         |
-| auth/changepassword/ | views.changepassword | change_password |
+| Path                     | View                 | Name            |
+|----------------------    |----------------------|-----------------|
+| accounts/signup/         | views.signup         | sign_up         |
+| accounts/signin/         | views.signin         | sign_in         |
+| accounts/changepassword/ | views.changepassword | change_password |
 
 ## Stretch Goals
 

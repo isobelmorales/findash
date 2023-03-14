@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- App Name -->
         <div class="navbar-header">
-            <a href="{% url 'dashboard' %}" class="navbar-brand">
+            <a href="{% url 'home' %}" class="navbar-brand">
                 <i class="fs-4 bi-cash-coin"></i>
                 <span class="fs-4 ps-2">   FinDash</span>
             </a>
@@ -11,29 +11,28 @@
         {% if user.is_authenticated %}
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                <span class="d-none d-sm-inline mx-1">User</span>
+                <img src="https://images.unsplash.com/photo-1550537687-c91072c4792d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" width="30" height="30" class="rounded-circle">
+                <span class="d-none d-sm-inline mx-1">{{ user.username }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">New transaction</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Change Password</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
             </ul>
         </div>
         {% else %}
         <!-- Authentication Nav -->
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'signup' %}">
                     <i class="bi bi-person-fill"></i> Sign Up
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'login' %}">
                     <i class="bi bi-box-arrow-in-right"></i> Login
                 </a>
             </li>
