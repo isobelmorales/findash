@@ -18,6 +18,7 @@ Features:
 - Django
 - Bootstrap
 - SQL
+- Chart.js
 
 ## User Stories
 
