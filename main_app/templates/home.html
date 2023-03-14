@@ -36,8 +36,8 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Card info</p>
+                    <h5 class="card-title">Net Worth</h5>
+                    <p class="card-text">$10,000,000</p>
                 </div>
             </div>
         </div>
@@ -63,18 +63,64 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-text">Card info</p>
+                    <h5 class="card-title">Budget</h5>
+                    <div id="chart-demo-pie" class="chart-lg"></div>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card Title</h5>
+                    <h5 class="card-title">Transactions</h5>
                     <p class="card-text">Card info</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+                chart: {
+                    type: "donut",
+                    fontFamily: 'inherit',
+                    height: 400,
+                    sparkline: {
+                        enabled: true
+                    },
+                    animations: {
+                        enabled: false
+                    },
+                },
+                fill: {
+                    opacity: 1,
+                },
+                series: [44, 55, 12, 2],
+                labels: ["Dining out", "Groceries", "Entertainment", "Misc"],
+                tooltip: {
+                    theme: 'dark'
+                },
+                grid: {
+                    strokeDashArray: 4,
+                },
+                legend: {
+                    show: true,
+                    position: 'right',
+                    offsetY: 12,
+                    markers: {
+                        width: 10,
+                        height: 10,
+                        radius: 100,
+                    },
+                    itemMargin: {
+                        horizontal: 8,
+                        vertical: 8
+                    },
+                },
+                tooltip: {
+                    fillSeriesColor: false
+                },
+            })).render();
+        });
+    </script>
 {% endblock %}

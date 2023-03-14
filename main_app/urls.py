@@ -14,6 +14,10 @@ urlpatterns = [
     path('accounts/create/', views.AccountCreate.as_view(), name='accounts_create'),
     # show account
     path('accounts/<int:account_id>/', views.show_account, name='show_account'),
+    # update account
+    path('accounts/<int:pk>/update/', views.AccountUpdate.as_view(), name='accounts_update'),
+    # delete account
+    path('accounts/<int:pk>/delete/', views.AccountDelete.as_view(), name='accounts_delete'),
     # budgets index
     path('budgets/', views.budgets_index, name='budgets_index'),
 ]

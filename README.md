@@ -18,7 +18,7 @@ Features:
 - Django
 - Bootstrap
 - SQL
-- Chart.js
+- ApexCharts
 
 ## User Stories
 

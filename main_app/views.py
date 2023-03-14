@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Transaction, Account, Budget
 from .forms import TransactionForm
 
@@ -46,6 +46,16 @@ def show_account(request, account_id):
 class AccountCreate(CreateView):
     model = Account
     fields = '__all__'
+
+# Update Account
+class AccountUpdate(UpdateView):
+    model = Account
+    fields = ['balance', 'type']
+
+# Delete Account
+class AccountDelete(DeleteView):
+    model = Account
+    success_url = '/accounts/'
 
 # Budget Index
 def budgets_index(request):

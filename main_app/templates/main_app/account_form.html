@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Add Account</h1>
+    {% if object %}
+        <h2>Edit <span class="text-primary">{{ object.name }}</span></h2>
+    {% else %}
+        <h2>Add Account</h2>
+    {% endif %}
+    <hr>
     <form action="" method="POST">
         {% csrf_token %}
         <table>

@@ -1,4 +1,5 @@
 {% for field in form %}
     <h5>{{ field.label_tag }}</h5>
     {{ field }}
+    <script>console.log(field)</script>
 {% endfor %}
