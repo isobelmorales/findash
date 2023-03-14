@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .models import Account
 
 # Create your views here.
 
@@ -28,3 +29,8 @@ def signup(request):
 @login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+# Accounts - Index
+@login_required
+def accounts_index(request):
+    return render(request, 'accounts/index.html')

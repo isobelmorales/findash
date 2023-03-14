@@ -8,11 +8,12 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     # dashboard
     path('dashboard/', views.dashboard, name='dashboard'),
-    # wallet
-    # wallet - create
-    # wallet - details
-    # wallet - update
-    # wallet - delete
+    # accounts
+    path('wallet/accounts/', views.accounts_index, name='accounts_index'),
+    # accounts - create
+    # accounts - details
+    # accounts - update
+    # accounts - delete
     # transactions
     # transactions - create
     # transactions - update
