@@ -6,8 +6,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     # transactions index
     path('transactions/', views.transactions_index, name='transactions_index'),
-    # create transaction
-    path('transactions/create', views.TransactionCreate.as_view(), name='transactions_create'),
     # add transaction
     path('transactions/add_transaction/', views.add_transaction, name='add_transaction'),
 ]

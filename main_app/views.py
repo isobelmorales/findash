@@ -20,12 +20,6 @@ def transactions_index(request):
     return render(request, 'transactions/index.html', { 'transactions': transactions, 'transaction_form': transaction_form })
 
 # Create Transaction
-class TransactionCreate(CreateView):
-    model = Transaction
-    # including all fields
-    fields = '__all__'
-    # redirecting to index page upon successful creation
-    success_url = '/transactions/'
 
 def add_transaction(request):
     form = TransactionForm(request.POST)
