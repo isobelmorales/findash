@@ -30,6 +30,30 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Accounts</h1>
+    <h2>Accounts</h2>
     <hr>
+    <div class="container">
+        <div class="card bg-dark-subtle p-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
+                {% for account in accounts %}
+                    <div class="col">
+                        <div class="card bg-body-secondary">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ account.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ account.type }}</h6>
+                                <p class="card-text">Balance: ${{ account.balance }}</p>
+                            </div>
+                            <div class="card-footer text-muted text-center">
+                                <a href="#" class="card-link">View</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-grid mt-4">
+            <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Account</button>
+    
+        </div>
+    </div>
 {% endblock %}
