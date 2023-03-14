@@ -36,6 +36,12 @@ def accounts_index(request):
 
     return render(request, 'accounts/index.html', { 'accounts': accounts })
 
+# Show Account
+def show_account(request, account_id):
+    account = Account.objects.get(id=account_id)
+
+    return render(request, 'accounts/show.html', { 'account': account })
+
 # Budget Index
 def budgets_index(request):
     budgets = Budget.objects.all()
