@@ -12,7 +12,8 @@ urlpatterns = [
     path('wallet/accounts/', views.accounts_index, name='accounts_index'),
     # accounts - create
     path('wallet/accounts/create/', views.AccountCreate.as_view(), name='accounts_create'),
-    # accounts - details
+    # accounts - show
+    path('wallet/accounts/<int:account_id>/', views.show_account, name='show_account')
     # accounts - update
     # accounts - delete
     # transactions

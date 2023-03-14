@@ -46,3 +46,10 @@ class AccountCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+# Show Account
+@login_required
+def show_account(request, account_id):
+    account = Account.objects.get(id=account_id)
+
+    return render(request, 'accounts/show.html', { 'account': account })
