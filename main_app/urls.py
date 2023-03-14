@@ -10,6 +10,8 @@ urlpatterns = [
     path('transactions/add_transaction/', views.add_transaction, name='add_transaction'),
     # accounts index
     path('accounts/', views.accounts_index, name='accounts_index'),
+    # create account
+    path('accounts/create/', views.AccountCreate.as_view(), name='accounts_create'),
     # show account
     path('accounts/<int:account_id>/', views.show_account, name='show_account'),
     # budgets index

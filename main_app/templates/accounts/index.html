@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
-{% include 'accounts/shared.html' %}
+
+{% block title %}Accounts | FinDash {% endblock %}
+
+{% block sidebar %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-speedometer2"></i> 
+        <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'accounts_index' %}" class="nav-link align-middle  active" aria-current="page">
+        <i class="fs-4 bi-grid"></i> 
+        <span class="ms-1 d-none d-sm-inline">Accounts</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'transactions_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-table"></i>
+        <span class="ms-1 d-none d-sm-inline">Transactions</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'budgets_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-pie-chart-fill"></i>
+        <span class="ms-1 d-none d-sm-inline">Budget</span>
+    </a>
+</li>
+{% endblock %}
 
 {% block content %}
     <h2>Accounts</h2>
@@ -24,7 +52,7 @@
             </div>
         </div>
         <div class="d-grid mt-4">
-            <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Account</button>
+            <a href="{% url 'accounts_create' %}" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Account</a>
         </div>
     </div>
 {% endblock %}

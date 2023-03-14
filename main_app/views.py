@@ -42,6 +42,11 @@ def show_account(request, account_id):
 
     return render(request, 'accounts/show.html', { 'account': account })
 
+# Create Account
+class AccountCreate(CreateView):
+    model = Account
+    fields = '__all__'
+
 # Budget Index
 def budgets_index(request):
     budgets = Budget.objects.all()
