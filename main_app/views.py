@@ -33,4 +33,5 @@ def dashboard(request):
 # Accounts - Index
 @login_required
 def accounts_index(request):
-    return render(request, 'accounts/index.html')
+    accounts = Account.objects.filter(user=request.user)
+    return render(request, 'accounts/index.html', { 'accounts': accounts })
