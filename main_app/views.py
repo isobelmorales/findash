@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Account
+
 
 # Create your views here.
 
@@ -35,3 +37,12 @@ def dashboard(request):
 def accounts_index(request):
     accounts = Account.objects.filter(user=request.user)
     return render(request, 'accounts/index.html', { 'accounts': accounts })
+
+# Create Account
+class AccountCreate(CreateView):
+    model = Account
+    fields = ['name', 'balance', 'type']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
