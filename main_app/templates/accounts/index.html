@@ -3,31 +3,30 @@
 {% block title %}Accounts | FinDash {% endblock %}
 
 {% block sidebar %}
-    <li class="nav-item">
-        <a href="{% url 'home' %}" class="nav-link align-middle px-0 text-white">
-            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
-        </a>
-    </li>
-    <li>
-        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle text-white active">
-            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Accounts</span> </a>
-        <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-            <li class="w-100">
-                <a href="{% url 'accounts_index' %}" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="{% url 'transactions_index' %}" class="nav-link px-0 align-middle text-white">
-            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Transactions</span></a>
-    </li>
-    <li>
-        <a href="{% url 'budgets_index' %}" class="nav-link px-0 align-middle text-white">
-            <i class="bi bi-pie-chart-fill"></i> <span class="ms-1 d-none d-sm-inline">Budget</span> </a>
-    </li>
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-speedometer2"></i> 
+        <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'accounts_index' %}" class="nav-link align-middle  active" aria-current="page">
+        <i class="fs-4 bi-grid"></i> 
+        <span class="ms-1 d-none d-sm-inline">Accounts</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'transactions_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-table"></i>
+        <span class="ms-1 d-none d-sm-inline">Transactions</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'budgets_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-pie-chart-fill"></i>
+        <span class="ms-1 d-none d-sm-inline">Budget</span>
+    </a>
+</li>
 {% endblock %}
 
 {% block content %}
