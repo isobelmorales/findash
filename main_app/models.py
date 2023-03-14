@@ -12,3 +12,12 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.name
+
+# Budget
+class Budget(models.Model):
+    category = models.CharField(max_length=50)
+    planned = models.IntegerField()
+    actual = models.IntegerField()
+
+    def __str__(self):
+        return self.name
