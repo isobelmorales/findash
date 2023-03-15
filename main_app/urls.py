@@ -22,12 +22,6 @@ urlpatterns = [
     path('transactions/', views.transactions_index, name='transactions_index'),
     # transactions - create
     path('transactions/create/', views.create_transaction, name='create_transaction'),
-    # add association
-    path('transactions/<int:transaction_id>/assoc_account/<int:account_id>/', views.assoc_account, name='assoc_account'),
-    path('transactions/<int:transaction_id>/assoc_budget/<int:budget_id>/', views.assoc_budget, name='assoc_budget'),
-    # add unassociation
-    path('transactions/<int:transaction_id>/unassoc_account/<int:account_id>/', views.unassoc_account, name='unassoc_account'),
-    path('transactions/<int:transaction_id>/unassoc_budget/<int:budget_id>/', views.unassoc_budget, name='unassoc_budget'),
     # transactions - update
     # transactions - delete
     # budget
@@ -36,6 +30,4 @@ urlpatterns = [
     path('budget/create/', views.create_budget, name='create_budget'),
     # budget - update
     # budget - delete
-    # add association
-    # add unassociation
 ]

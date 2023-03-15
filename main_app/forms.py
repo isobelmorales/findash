@@ -11,9 +11,9 @@ class TransactionForm(ModelForm):
         widgets = {
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'placeholder': 'MM-DD-YYYY'}),
-            'account': forms.Select(attrs={'class': 'form-select'}),
+            'account': forms.SelectMultiple(attrs={'class': 'form-select'}),
             'amount': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-select'}),
+            'category': forms.SelectMultiple(attrs={'class': 'form-select'})
         }
 
 class BudgetForm(ModelForm):
