@@ -32,4 +32,110 @@
 {% block content %}
     <h2>Budget</h2>
     <hr>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <div id="chart-demo-pie" class="chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">
+                        <!-- Table of Budget Info -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Planned</th>
+                                        <th scope="col">Actual</th>
+                                        <th scope="col">Difference</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    {% for budget in budgets %}
+                                        <tr>
+                                            <td>{{ budget.category }}</td>
+                                            <td>${{ budget.planned }}</td>
+                                            <td>$ TBD</td>
+                                            <td>$ TBD-2</td>
+                                            <td>
+                                                <a href="#" class="link-secondary">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="link-danger">
+                                                    <i class="bi bi-trash3-fill"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Trigger Modal Button -->
+                        <div class="d-grid mt-4">
+                            <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#newBudget">
+                                <i class="bi bi-plus-circle"></i> Add Category
+                            </button>
+                        </div>
+                        <!-- Modal -->
+                        {% include 'budgets/create_modal.html' %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            window.ApexCharts && (new ApexCharts(document.getElementById('chart-demo-pie'), {
+                chart: {
+                    type: "donut",
+                    fontFamily: 'inherit',
+                    height: 400,
+                    sparkline: {
+                        enabled: true
+                    },
+                    animations: {
+                        enabled: false
+                    },
+                },
+                fill: {
+                    opacity: 1,
+                },
+                series: [44, 55, 12, 2],
+                labels: ["Dining out", "Groceries", "Entertainment", "Misc"],
+                tooltip: {
+                    theme: 'dark'
+                },
+                grid: {
+                    strokeDashArray: 4,
+                },
+                legend: {
+                    show: true,
+                    position: 'right',
+                    offsetY: 12,
+                    markers: {
+                        width: 10,
+                        height: 10,
+                        radius: 100,
+                    },
+                    itemMargin: {
+                        horizontal: 8,
+                        vertical: 8
+                    },
+                },
+                tooltip: {
+                    fillSeriesColor: false
+                },
+            })).render();
+        });
+    </script>
 {% endblock %}

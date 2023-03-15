@@ -1,0 +1,21 @@
+<div class="modal fade" id="newBudget" tabindex="-1" aria-labelledby="newBudgetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="newBudgetLabel">Add Budget Category</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'create_budget' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {{ budget_form }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Save" class="btn btn-primary right"> 
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

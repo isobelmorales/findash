@@ -1,10 +1,10 @@
 # Imports
 from django.forms import ModelForm
-from .models import Transaction
+from .models import Transaction, Budget
 from django import forms
 
 class TransactionForm(ModelForm):
-    template_name = 'form_snippet.html'
+    template_name = 'transaction_form_snippet.html'
     class Meta:
         model = Transaction
         fields = ['description', 'date', 'account', 'amount', 'category']
@@ -14,4 +14,14 @@ class TransactionForm(ModelForm):
             'account': forms.Select(attrs={'class': 'form-select'}),
             'amount': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-select'}),
+        }
+
+class BudgetForm(ModelForm):
+    template_name = 'budget_form_snippet.html'
+    class Meta:
+        model = Budget
+        fields = ['category', 'planned']
+        widgets = {
+            'category': forms.TextInput(attrs={'class': 'form-control'}),
+            'planned': forms.TextInput(attrs={'class': 'form-control'})
         }

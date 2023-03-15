@@ -40,8 +40,9 @@
                         <div class="card bg-body-secondary">
                             <div class="card-body">
                                 <h5 class="card-title">{{ account.name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ account.type }}</h6>
-                                <p class="card-text">Balance: ${{ account.balance }}</p>
+                                <p class="card-text">
+                                    ${{ account.balance }}
+                                </p>
                             </div>
                             <div class="card-footer text-muted text-center">
                                 <a href="{% url 'show_account' account.id %}" class="card-link">View Details</a>

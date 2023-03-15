@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account, Transaction, Budget
-from .forms import TransactionForm
+from .forms import TransactionForm, BudgetForm
 
 
 # Create your views here.
@@ -81,7 +81,7 @@ def create_transaction(request):
     form = TransactionForm(request.POST)
 
     if form.is_valid():
-        form.instance.user = self.request.user
+        instance.user = request.user
         new_transaction = form.save(commit=False)
         new_transaction.save()
         form.save_account()
@@ -96,8 +96,22 @@ def create_transaction(request):
 @login_required
 def budget_index(request):
     budgets = Budget.objects.filter(user=request.user)
-    return render(request, 'budgets/index.html', { 'budgets': budgets })
+
+    budget_form = BudgetForm()
+
+    return render(request, 'budgets/index.html', { 'budgets': budgets, 'budget_form': budget_form })
 
 # Create Budget
+@login_required
+def create_budget(request):
+    form = BudgetForm(request.POST)
+
+    if form.is_valid():
+        form.instance.user = request.user
+        new_budget = form.save(commit=False)
+        new_budget.save()
+    
+    return redirect('budget_index')
+
 # Update Budget
 # Delete Budget
