@@ -6,12 +6,6 @@ Capstone Project
 
 This app allows users to track their finances and spending.
 
-Features:
-
-- Budget tracking
-- Balance Sheet
-- Tab splitting
-
 ### Technologies
 
 - Python
@@ -19,7 +13,6 @@ Features:
 - Bootstrap
 - SQL
 - ApexCharts
-- Popper
 
 ## User Stories
 
@@ -37,7 +30,6 @@ As a user, I want the ability to...
 - update transactions.
 - delete transactions.
 - categorize my transactions.
-- flag transactions.
 - create budgets/savings goals.
 - track my budget/savings goals.
 ```
@@ -83,7 +75,6 @@ As a user, I want the ability to...
 |--------------------------|------------------------------|----------------|
 | budgets/                 | views.budgets_index          | budgets_index  |
 | budgets/create/          | views.BudgetCreate.as_view() | budgets_create |
-| budgets/<int:pk>/update/ | views.BudgetUpdate.as_view() | budgets_update |
 | budgets/<int:pk>/delete/ | views.BudgetDelete.as_view() | budgets_delete |
 
 ### Authentication
