@@ -9,11 +9,4 @@
         <input type="submit" value="Confirm Delete" class="btn btn-danger">
         <a href="{% url 'show_account' account.id %}" class="m-2">Cancel</a>
     </form>
-    <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-title="Are you sure you want to delete this category?" data-bs-content="And here's some amazing content. It's very engaging. Right?">
-        Click to toggle popover
-    </button>
-    <script>
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-    </script>
 {% endblock %}

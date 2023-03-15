@@ -128,6 +128,9 @@ def create_transaction(request):
 
 # Update Transaction
 # Delete Transaction
+class TransactionDelete(LoginRequiredMixin, DeleteView):
+    model = Transaction
+    success_url = '/transactions/'
 
 # Budget
 @login_required

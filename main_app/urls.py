@@ -24,6 +24,7 @@ urlpatterns = [
     path('transactions/create/', views.create_transaction, name='create_transaction'),
     # transactions - update
     # transactions - delete
+    path('transactions/<int:pk>/delete/', views.TransactionDelete.as_view(), name='transaction_delete'),
     # budget
     path('budget/', views.budget_index, name='budget_index'),
     # budget - create
