@@ -35,7 +35,7 @@ def signup(request):
 @login_required
 def dashboard(request):
     budgets = Budget.objects.filter(user=request.user)
-    transactions = Transaction.objects.filter(user=request.user)
+    transactions = Transaction.objects.filter(user=request.user)[:6]
     accounts = Account.objects.filter(user=request.user)
 
     for account in accounts:
@@ -141,4 +141,8 @@ def create_budget(request):
     return redirect('budget_index')
 
 # Update Budget
+
 # Delete Budget
+class BudgetDelete(LoginRequiredMixin, DeleteView):
+    model = Budget
+    success_url = '/budget/'

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Delete Category</h2>
+    <hr>
+    <h4 class="my-4">Are you sure you want to delete <span class="text-primary">{{ object.category }}?</span></h4>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Delete" class="btn btn-danger">
+        <a href="{% url 'budget_index' %}" class="m-2">Cancel</a>
+    </form>
+{% endblock %}

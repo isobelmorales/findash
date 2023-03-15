@@ -39,6 +39,9 @@ class Budget(models.Model):
 
     def __str__(self):
         return self.category
+    
+    def get_absolute_url(self):
+        return reverse('budget_index', kwargs={'budget_id': self.id })
 
 # Transaction
 class Transaction(models.Model):

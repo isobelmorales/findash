@@ -19,6 +19,7 @@ Features:
 - Bootstrap
 - SQL
 - ApexCharts
+- Popper
 
 ## User Stories
 

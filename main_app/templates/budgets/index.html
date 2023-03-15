@@ -34,7 +34,7 @@
     <h2>Budget</h2>
     <hr>
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
+        <div class="col card-group">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"></h5>
@@ -71,7 +71,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#" class="link-danger">
+                                                <a href="{% url 'budget_delete' budget.id %}" class="link-danger">
                                                     <i class="bi bi-trash3-fill"></i>
                                                 </a>
                                             </td>
@@ -129,7 +129,7 @@
                 },
                 legend: {
                     show: true,
-                    position: 'right',
+                    position: 'bottom',
                     offsetY: 12,
                     markers: {
                         width: 10,
