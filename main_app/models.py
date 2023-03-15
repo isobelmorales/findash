@@ -14,7 +14,10 @@ TYPES = (
 # Account
 class Account(models.Model):
     name = models.CharField(max_length=50)
-    balance = models.IntegerField()
+    balance = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
     type = models.CharField(
         max_length=10,
         choices = TYPES,
@@ -42,9 +45,15 @@ class Transaction(models.Model):
     description = models.CharField(max_length=100)
     date = models.DateField()
     account = models.ManyToManyField(Account)
-    amount = models.IntegerField()
+    amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
     category = models.ManyToManyField(Budget)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
+    
+    class Meta:
+        ordering = ['date']
