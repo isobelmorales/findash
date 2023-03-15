@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Budget | FinDash {% endblock %}
+
+{% block sidebar %}
+<li class="nav-item">
+    <a href="{% url 'dashboard' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-speedometer2"></i> 
+        <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'accounts_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-grid"></i> 
+        <span class="ms-1 d-none d-sm-inline">Wallet</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'transactions_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-table"></i>
+        <span class="ms-1 d-none d-sm-inline">Transactions</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'budget_index' %}" class="nav-link align-middle  active" aria-current="page">
+        <i class="fs-4 bi-pie-chart-fill"></i>
+        <span class="ms-1 d-none d-sm-inline">Budget</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+    <h2>Budget</h2>
+    <hr>
+{% endblock %}

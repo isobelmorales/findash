@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Account
+from .models import Account, Transaction, Budget
 
 
 # Create your views here.
@@ -64,3 +64,23 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
 class AccountDelete(LoginRequiredMixin, DeleteView):
     model = Account
     success_url = '/wallet/accounts/'
+
+# Transactions
+@login_required
+def transactions_index(request):
+    transactions = Transaction.objects.filter(user=request.user)
+    return render(request, 'transactions/index.html', { 'transactions': transactions })
+
+# Create Transaction
+# Update Transaction
+# Delete Transaction
+
+# Budget
+@login_required
+def budget_index(request):
+    budgets = Budget.objects.filter(user=request.user)
+    return render(request, 'budgets/index.html', { 'budgets': budgets })
+
+# Create Budget
+# Update Budget
+# Delete Budget

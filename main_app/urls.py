@@ -19,10 +19,12 @@ urlpatterns = [
     # accounts - delete
     path('wallet/accounts/<int:pk>/delete/', views.AccountDelete.as_view(), name='accounts_delete'),
     # transactions
+    path('transactions/', views.transactions_index, name='transactions_index'),
     # transactions - create
     # transactions - update
     # transactions - delete
     # budget
+    path('budget/', views.budget_index, name='budget_index'),
     # budget - create
     # budget - update
     # budget - delete

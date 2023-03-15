@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions | FinDash {% endblock %}
+
+{% block sidebar %}
+<li class="nav-item">
+    <a href="{% url 'dashboard' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-speedometer2"></i> 
+        <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'accounts_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-grid"></i> 
+        <span class="ms-1 d-none d-sm-inline">Wallet</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'transactions_index' %}" class="nav-link align-middle  active" aria-current="page">
+        <i class="fs-4 bi-table"></i>
+        <span class="ms-1 d-none d-sm-inline">Transactions</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'budget_index' %}" class="nav-link align-middle text-white">
+        <i class="fs-4 bi-pie-chart-fill"></i>
+        <span class="ms-1 d-none d-sm-inline">Budget</span>
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+    <h2>Transactions</h2>
+    <hr>
+    <!-- Trigger Modal Button -->
+    {% comment %} <div class="d-flex justify-content-md-end">
+        <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#newTransaction">
+            <i class="bi bi-plus-circle-fill"></i> Add Transaction
+        </button>
+    </div>
+
+    <!-- Modal -->
+    {% include 'transactions/create_modal.html' %} {% endcomment %}
+
+    <!-- Table of All Transactions -->
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Category</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.description }}</td>
+                        <td>{{ transaction.account }}</td>
+                        <td>${{ transaction.amount }}</td>
+                        <td>{{ transaction.category }}</td>
+                        <td>
+                            <a href="#" class="link-secondary">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" class="link-danger">
+                                <i class="bi bi-trash3-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
