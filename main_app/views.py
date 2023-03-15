@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account, Transaction, Budget
 from .forms import TransactionForm, BudgetForm
-from django.db.models import F
+from django.db.models import Sum
 from django.db import models
 
 
@@ -40,19 +40,30 @@ def dashboard(request):
 
     for account in accounts:
         transactions_sum = account.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
-        account.newbalance = transactions_sum
+        account.activity = transactions_sum
+        account.newbal = account.balance + account.activity
 
     for budget in budgets:
         transactions_sum = budget.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
         budget.actual = transactions_sum
         budget.diff = budget.planned - budget.actual
 
-    return render(request, 'dashboard.html', { 'budgets': budgets, 'transactions': transactions, 'accounts': accounts })
+    total_assets = Account.objects.filter(type='asset').aggregate(Sum('balance'))['balance__sum']
+    total_liabilities = Account.objects.filter(type='liability').aggregate(Sum('balance'))['balance__sum']
+    net_worth = total_assets - total_liabilities
+
+    return render(request, 'dashboard.html', { 'budgets': budgets, 'transactions': transactions, 'accounts': accounts, 'net_worth': net_worth })
 
 # Accounts - Index
 @login_required
 def accounts_index(request):
     accounts = Account.objects.filter(user=request.user)
+
+    for account in accounts:
+        transactions_sum = account.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
+        account.activity = transactions_sum
+        account.newbal = account.balance + account.activity
+
     return render(request, 'accounts/index.html', { 'accounts': accounts })
 
 # Create Account
@@ -69,7 +80,11 @@ class AccountCreate(LoginRequiredMixin, CreateView):
 def show_account(request, account_id):
     account = Account.objects.get(id=account_id)
 
-    return render(request, 'accounts/show.html', { 'account': account })
+    transactions_sum = account.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
+    account.activity = transactions_sum
+    account.newbal = account.balance + account.activity
+
+    return render(request, 'accounts/show.html', { 'account': account, 'account.activity': account.activity, 'account.newbal': account.newbal })
 
 # Update Account
 class AccountUpdate(LoginRequiredMixin, UpdateView):
@@ -139,8 +154,6 @@ def create_budget(request):
         new_budget.save()
     
     return redirect('budget_index')
-
-# Update Budget
 
 # Delete Budget
 class BudgetDelete(LoginRequiredMixin, DeleteView):

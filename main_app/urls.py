@@ -28,7 +28,6 @@ urlpatterns = [
     path('budget/', views.budget_index, name='budget_index'),
     # budget - create
     path('budget/create/', views.create_budget, name='create_budget'),
-    # budget - update
     # budget - delete
      path('budget/<int:pk>/delete/', views.BudgetDelete.as_view(), name='budget_delete'),
 ]
