@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account, Transaction, Budget
 from .forms import TransactionForm, BudgetForm
+from django.db.models import F
 
 
 # Create your views here.
@@ -81,12 +82,38 @@ def create_transaction(request):
     form = TransactionForm(request.POST)
 
     if form.is_valid():
-        instance.user = request.user
+        form.instance.user = request.user
+        account_id = request.POST.get('account')
+        category_id = request.POST.get('category')
         new_transaction = form.save(commit=False)
-        new_transaction.save()
-        form.save_account()
-        form.save_budget()
-    
+        transaction = new_transaction.save()
+        transaction.account.add(account_id)
+        transaction.category.add(category_id)
+        
+    return redirect('transactions_index')
+
+# associate account
+@login_required
+def assoc_account(request, transaction_id, account_id):
+    Transaction.objects.get(id=transaction_id).account.add(account_id)
+    return redirect('transactions_index')
+
+# unassociate account
+@login_required
+def unassoc_account(request, transaction_id, account_id):
+    Transaction.objects.get(id=transaction_id).account.remove(account_id)
+    return redirect('transactions_index')
+
+# associate budget
+@login_required
+def assoc_budget(request, transaction_id, budget_id):
+    Transaction.objects.get(id=transaction_id).category.add(budget_id)
+    return redirect('transactions_index')
+
+# unassociate budget
+@login_required
+def unassoc_budget(request, transaction_id, budget_id):
+    Transaction.objects.get(id=transaction_id).category.remove(budget_id)
     return redirect('transactions_index')
 
 # Update Transaction
