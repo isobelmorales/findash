@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account, Transaction, Budget
+from .forms import TransactionForm
 
 
 # Create your views here.
@@ -69,9 +70,25 @@ class AccountDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def transactions_index(request):
     transactions = Transaction.objects.filter(user=request.user)
-    return render(request, 'transactions/index.html', { 'transactions': transactions })
+
+    transaction_form = TransactionForm()
+
+    return render(request, 'transactions/index.html', { 'transactions': transactions, 'transaction_form': transaction_form })
 
 # Create Transaction
+@login_required
+def create_transaction(request):
+    form = TransactionForm(request.POST)
+
+    if form.is_valid():
+        form.instance.user = self.request.user
+        new_transaction = form.save(commit=False)
+        new_transaction.save()
+        form.save_account()
+        form.save_budget()
+    
+    return redirect('transactions_index')
+
 # Update Transaction
 # Delete Transaction
 

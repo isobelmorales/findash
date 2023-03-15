@@ -33,14 +33,14 @@
     <h2>Transactions</h2>
     <hr>
     <!-- Trigger Modal Button -->
-    {% comment %} <div class="d-flex justify-content-md-end">
+    <div class="d-flex justify-content-md-end">
         <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#newTransaction">
             <i class="bi bi-plus-circle-fill"></i> Add Transaction
         </button>
     </div>
 
     <!-- Modal -->
-    {% include 'transactions/create_modal.html' %} {% endcomment %}
+    {% include 'transactions/create_modal.html' %}
 
     <!-- Table of All Transactions -->
     <div class="table-responsive">
