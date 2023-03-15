@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Account, Transaction, Budget
 from .forms import TransactionForm, BudgetForm
 from django.db.models import F
+from django.db import models
 
 
 # Create your views here.
@@ -33,7 +34,20 @@ def signup(request):
 # Dashboard
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    budgets = Budget.objects.filter(user=request.user)
+    transactions = Transaction.objects.filter(user=request.user)
+    accounts = Account.objects.filter(user=request.user)
+
+    for account in accounts:
+        transactions_sum = account.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
+        account.newbalance = transactions_sum
+
+    for budget in budgets:
+        transactions_sum = budget.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
+        budget.actual = transactions_sum
+        budget.diff = budget.planned - budget.actual
+
+    return render(request, 'dashboard.html', { 'budgets': budgets, 'transactions': transactions, 'accounts': accounts })
 
 # Accounts - Index
 @login_required
@@ -82,11 +96,7 @@ def transactions_index(request):
 def create_transaction(request):
     form = TransactionForm(request.POST)
     account_id = request.POST.get('account')
-    print('account id', account_id)
     category_id = request.POST.get('category')
-    print('category id', category_id)
-    print('request post', request.POST)
-    print('request.body', request.body)
 
     if form.is_valid():
         form.instance.user = request.user
@@ -110,6 +120,11 @@ def budget_index(request):
     budgets = Budget.objects.filter(user=request.user)
 
     budget_form = BudgetForm()
+
+    for budget in budgets:
+        transactions_sum = budget.transaction_set.aggregate(models.Sum('amount'))['amount__sum'] or 0
+        budget.actual = transactions_sum
+        budget.diff = budget.planned - budget.actual
 
     return render(request, 'budgets/index.html', { 'budgets': budgets, 'budget_form': budget_form })
 
