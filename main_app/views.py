@@ -48,11 +48,17 @@ def dashboard(request):
         budget.actual = transactions_sum
         budget.diff = budget.planned - budget.actual
 
-    total_assets = Account.objects.filter(type='asset').aggregate(Sum('balance'))['balance__sum']
-    total_liabilities = Account.objects.filter(type='liability').aggregate(Sum('balance'))['balance__sum']
+    total_assets = Account.objects.filter(user=request.user, type='asset').aggregate(Sum('balance'))['balance__sum'] or 0
+    total_liabilities = Account.objects.filter(user=request.user, type='liability').aggregate(Sum('balance'))['balance__sum'] or 0
     net_worth = total_assets - total_liabilities
 
-    return render(request, 'dashboard.html', { 'budgets': budgets, 'transactions': transactions, 'accounts': accounts, 'net_worth': net_worth })
+    new_activity = Transaction.objects.filter(user=request.user).aggregate(models.Sum('amount'))['amount__sum'] or 0
+
+    planned_budget = Budget.objects.filter(user=request.user).aggregate(models.Sum('planned'))['planned__sum'] or 0
+
+    actual_budget = new_activity / planned_budget * 100
+
+    return render(request, 'dashboard.html', { 'budgets': budgets, 'transactions': transactions, 'accounts': accounts, 'net_worth': net_worth, 'new_activity': new_activity, 'actual_budget': actual_budget })
 
 # Accounts - Index
 @login_required
@@ -84,7 +90,27 @@ def show_account(request, account_id):
     account.activity = transactions_sum
     account.newbal = account.balance + account.activity
 
-    return render(request, 'accounts/show.html', { 'account': account, 'account.activity': account.activity, 'account.newbal': account.newbal })
+    transaction_form = TransactionForm()
+
+    if request.POST:
+        form = TransactionForm(request.POST)
+        account_id = request.POST.get('account')
+        category_id = request.POST.get('category')
+
+        if form.is_valid():
+            form.instance.user = request.user
+            new_transaction = form.save(commit=False)
+            print('new transaction', new_transaction)
+            new_transaction.save()
+            new_transaction.account.add(account_id)
+            new_transaction.category.add(category_id)
+        else:
+            print(form.errors)
+            return render(request, 'dashboard.html')
+
+        return redirect('transactions_index')
+
+    return render(request, 'accounts/show.html', { 'account': account, 'account.activity': account.activity, 'account.newbal': account.newbal, 'transaction_form': transaction_form })
 
 # Update Account
 class AccountUpdate(LoginRequiredMixin, UpdateView):
@@ -99,8 +125,8 @@ class AccountDelete(LoginRequiredMixin, DeleteView):
 # Transactions
 @login_required
 def transactions_index(request):
-    # transactions = Transaction.objects.filter(user=request.user)
-    transactions = Transaction.objects.all()
+    transactions = Transaction.objects.filter(user=request.user)
+    # transactions = Transaction.objects.all()
 
     transaction_form = TransactionForm()
 
@@ -127,6 +153,10 @@ def create_transaction(request):
     return redirect('transactions_index')
 
 # Update Transaction
+class TransactionUpdate(LoginRequiredMixin, UpdateView):
+    model = Transaction
+    fields = ['description', 'date', 'account', 'amount', 'category']
+
 # Delete Transaction
 class TransactionDelete(LoginRequiredMixin, DeleteView):
     model = Transaction

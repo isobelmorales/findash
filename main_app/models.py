@@ -59,7 +59,7 @@ class Transaction(models.Model):
         return self.description
     
     def get_absolute_url(self):
-        return reverse('transaction_index', kwargs={'transaction_id': self.id })
+        return reverse('transactions_index')
     
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']

@@ -38,14 +38,6 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">${{ net_worth|intcomma }}</h3>
-                    <p class="card-text">Net Worth</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Card Title</h3>
                     <p class="card-text">Starting Balance</p>
                 </div>
             </div>
@@ -53,8 +45,18 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Card Title</h3>
-                    <p class="card-text">Estimated Ending Balance</p>
+                    <h3 class="card-title">
+                        ${{ new_activity|intcomma }}
+                    </h3>
+                    <p class="card-text">New Activity</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ actual_budget }}%</h3>
+                    <p class="card-text">of total budget used</p>
                 </div>
             </div>
         </div>

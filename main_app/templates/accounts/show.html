@@ -101,6 +101,16 @@
                                         </table>
                                     </div>
                                 </p>
+                                <hr>
+                                    <!-- Trigger Modal Button -->
+                                <div class="d-flex justify-content-md-end">
+                                    <button type="button" class="btn btn-primary btn-md" data-bs-toggle="modal" data-bs-target="#newTransaction">
+                                        <i class="bi bi-plus-circle-fill"></i> Add Transaction
+                                    </button>
+                                </div>
+
+                                <!-- Modal -->
+                                {% include 'transactions/create_modal.html' %}
                             </div>
                         </div>
                     </div>

@@ -23,6 +23,7 @@ urlpatterns = [
     # transactions - create
     path('transactions/create/', views.create_transaction, name='create_transaction'),
     # transactions - update
+    path('transactions/<int:pk>/update/', views.TransactionUpdate.as_view(), name='transaction_update'),
     # transactions - delete
     path('transactions/<int:pk>/delete/', views.TransactionDelete.as_view(), name='transaction_delete'),
     # budget
